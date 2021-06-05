@@ -1,6 +1,7 @@
 package com.ecommerce.entities;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -43,7 +45,10 @@ public class Client {
 	// relacionamento client-endereco
 	@ManyToOne
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
-	Endereco endereco;
+	private Endereco endereco;
+
+	@OneToMany(mappedBy = "client")
+	private List<Pedidos> listPedidos;
 
 	public Integer getId() {
 		return id;
@@ -115,6 +120,14 @@ public class Client {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<Pedidos> getListPedidos() {
+		return listPedidos;
+	}
+
+	public void setListPedidos(List<Pedidos> listPedidos) {
+		this.listPedidos = listPedidos;
 	}
 
 }
