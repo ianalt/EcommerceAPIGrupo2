@@ -39,4 +39,53 @@ public class Pedidos {
 	@ManyToOne
 	@JoinColumn(name = "client_id", referencedColumnName = "id")
 	private Client client;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(Integer numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
+
+	public BigDecimal getTotalPedido() {
+		return totalPedido;
+	}
+
+	public void setTotalPedido(BigDecimal totalPedido) {
+		this.totalPedido = totalPedido;
+	}
+
+	public Calendar getDataPedido() {
+		return dataPedido;
+	}
+
+	public void setDataPedido(Calendar dataPedido) {
+		this.dataPedido = dataPedido;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
 }
