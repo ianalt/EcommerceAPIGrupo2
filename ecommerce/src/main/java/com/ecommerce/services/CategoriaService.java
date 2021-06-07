@@ -40,6 +40,8 @@ public class CategoriaService {
 		} catch(Exception e) {
 			throw new Exception("Não foi possível recuperar a lista de categorias :: " + e.getMessage());
 		}
+
+		
 	}
 	
 	//findAllVO

@@ -20,8 +20,8 @@ import javax.persistence.Table;
 public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "id_produto")
+	private Integer idProduto;
 
 	@Column(name = "nome")
 	private String nome;
@@ -43,18 +43,18 @@ public class Produto {
 
 	// relacionamento produto-categoria
 	@ManyToOne
-	@JoinColumn(name = "categoria_id", referencedColumnName = "id")
+	@JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
 	private Categoria categoria;
 
 	@OneToMany(mappedBy = "produtoId")
 	private Set<ProdutosPedidos> setProdutosPedidos = new HashSet<>();
 
 	public Integer getId() {
-		return id;
+		return idProduto;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idProduto = id;
 	}
 
 	public String getNome() {

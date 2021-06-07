@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecommerce.entities.Client;
+import com.ecommerce.entities.Cliente;
 import com.ecommerce.repositories.ClientRepository;
 
 @Service
@@ -13,13 +13,13 @@ public class ClientService {
 	@Autowired
 	public ClientRepository clientRepository;
 
-	public Client findById(Integer id) {
-		Client client = clientRepository.findById(id).get();
+	public Cliente findById(Integer id) {
+		Cliente client = clientRepository.findById(id).get();
 		return client;
 	}
 
-	public List<Client> findAll() {
-		List<Client> listaClient = clientRepository.findAll();
+	public List<Cliente> findAll() {
+		List<Cliente> listaClient = clientRepository.findAll();
 		return listaClient;
 	}
 
@@ -28,8 +28,8 @@ public class ClientService {
 		return totalClients;
 	}
 
-	public Client save(Client client) {
-		Client novoClient = clientRepository.save(client);
+	public Cliente save(Cliente client) {
+		Cliente novoClient = clientRepository.save(client);
 		if (novoClient.getId() != null) {
 			return novoClient;
 		} else {
@@ -46,7 +46,7 @@ public class ClientService {
 		}
 	}
 
-	public Client update(Client client, Integer id) {
+	public Cliente update(Cliente client, Integer id) {
 		client.setId(id);
 		return clientRepository.save(client);
 	}

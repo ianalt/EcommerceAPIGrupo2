@@ -19,7 +19,7 @@ public class SpringFoxConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfoBuilder().title("Documentação da API DellStore")
+		ApiInfo apiInfo = new ApiInfoBuilder().title("Documentação da API Ecommerce")
 				.description("Essa API foi desenvolvida para estudo do Framework Spring")
 				.license("Apache License Version 2.0").version("1.0.0").build();
 

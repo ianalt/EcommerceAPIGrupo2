@@ -14,12 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "client")
-public class Client {
+@Table(name = "cliente")
+public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "id_cliente")
+	private Integer idCliente;
 
 	@Column(name = "email")
 	private String email;
@@ -44,18 +44,18 @@ public class Client {
 
 	// relacionamento client-endereco
 	@ManyToOne
-	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
+	@JoinColumn(name = "id_endereco", referencedColumnName = "id_endereco")
 	private Endereco endereco;
 
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "cliente")
 	private List<Pedidos> listPedidos;
 
 	public Integer getId() {
-		return id;
+		return idCliente;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idCliente = id;
 	}
 
 	public String getEmail() {

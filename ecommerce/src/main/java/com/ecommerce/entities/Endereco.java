@@ -15,8 +15,8 @@ import javax.persistence.Table;
 public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "id_endereco")
+	private Integer idEndereco;
 
 	@Column(name = "cep")
 	private String cep;
@@ -42,14 +42,14 @@ public class Endereco {
 
 	// relacionamento endereco-client
 	@OneToMany(mappedBy = "endereco")
-	private List<Client> listClient;
+	private List<Cliente> listClient;
 
 	public Integer getId() {
-		return id;
+		return idEndereco;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idEndereco = id;
 	}
 
 	public String getCep() {
@@ -108,11 +108,11 @@ public class Endereco {
 		this.estado = estado;
 	}
 
-	public List<Client> getListClient() {
+	public List<Cliente> getListClient() {
 		return listClient;
 	}
 
-	public void setListClient(List<Client> listClient) {
+	public void setListClient(List<Cliente> listClient) {
 		this.listClient = listClient;
 	}
 

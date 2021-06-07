@@ -26,6 +26,7 @@ public class CategoriaController {
 	@Autowired
 	private CategoriaService categoriaService;
 
+
 	// findById
 	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
@@ -75,6 +76,8 @@ public class CategoriaController {
 		} else {
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
+
+		
 	}
 
 	// update

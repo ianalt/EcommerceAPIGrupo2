@@ -20,8 +20,8 @@ import javax.persistence.Table;
 public class Pedidos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "id_pedidos")
+	private Integer idPedidos;
 
 	@Column(name = "numeropedido")
 	private Integer numeroPedido;
@@ -36,19 +36,19 @@ public class Pedidos {
 	private String status;
 
 	@ManyToOne
-	@JoinColumn(name = "client_id", referencedColumnName = "id")
-	private Client client;
+	@JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
+	private Cliente cliente;
 
 	// essa é a lista?
 	@OneToMany(mappedBy = "pedidosId")
 	private Set<ProdutosPedidos> setProdutosPedidos = new HashSet<>();
 
 	public Integer getId() {
-		return id;
+		return idPedidos;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idPedidos = id;
 	}
 
 	public Integer getNumeroPedido() {
@@ -83,12 +83,12 @@ public class Pedidos {
 		this.status = status;
 	}
 
-	public Client getClient() {
-		return client;
+	public Cliente getClient() {
+		return cliente;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setClient(Cliente client) {
+		this.cliente = client;
 	}
 
 	public Set<ProdutosPedidos> getSetProdutosPedidos() {

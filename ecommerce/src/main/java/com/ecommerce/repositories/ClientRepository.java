@@ -3,9 +3,9 @@ package com.ecommerce.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ecommerce.entities.Client;
+import com.ecommerce.entities.Cliente;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, Integer> {
+public interface ClientRepository extends JpaRepository<Cliente, Integer> {
 
 }

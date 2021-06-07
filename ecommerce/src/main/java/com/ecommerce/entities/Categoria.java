@@ -13,10 +13,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "categoria")
 public class Categoria {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "id_categoria")
+	private Integer idCategoria;
 
 	@Column(name = "nome")
 	private String nome;
@@ -28,11 +29,11 @@ public class Categoria {
 	private List<Produto> listProduto;
 
 	public Integer getId() {
-		return id;
+		return idCategoria;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idCategoria = id;
 	}
 
 	public String getNome() {
