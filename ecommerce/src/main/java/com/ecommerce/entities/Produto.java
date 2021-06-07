@@ -2,6 +2,8 @@ package com.ecommerce.entities;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -42,6 +45,9 @@ public class Produto {
 	@ManyToOne
 	@JoinColumn(name = "categoria_id", referencedColumnName = "id")
 	private Categoria categoria;
+
+	@OneToMany(mappedBy = "produtoId")
+	private Set<ProdutosPedidos> setProdutosPedidos = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -105,6 +111,14 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Set<ProdutosPedidos> getSetProdutosPedidos() {
+		return setProdutosPedidos;
+	}
+
+	public void setSetProdutosPedidos(Set<ProdutosPedidos> setProdutosPedidos) {
+		this.setProdutosPedidos = setProdutosPedidos;
 	}
 
 }

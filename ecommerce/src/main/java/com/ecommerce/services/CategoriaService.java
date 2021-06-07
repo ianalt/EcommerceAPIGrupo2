@@ -3,6 +3,8 @@ package com.ecommerce.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.entities.Categoria;
@@ -19,10 +21,30 @@ public class CategoriaService {
 		return categoria;
 	}
 
-	public List<Categoria> findAll() {
-		List<Categoria> listaCategoria = categoriaRepository.findAll();
-		return listaCategoria;
+	public List<Categoria> findAll(Integer pagina, Integer qtdRegistros) throws Exception {
+		Pageable page = null;
+		List<Categoria> listCategoria = null;
+		List<Categoria> listCategoriaComPaginacao = null;
+		
+		try {
+			if (pagina != null && qtdRegistros != null) {
+				page = PageRequest.of(pagina, qtdRegistros);
+				listCategoriaComPaginacao = categoriaRepository.findAll(page).getContent();
+				
+				return listCategoriaComPaginacao;
+			} else {
+				listCategoria = categoriaRepository.findAll();
+				
+				return listCategoria;
+			}
+		} catch(Exception e) {
+			throw new Exception("Não foi possível recuperar a lista de categorias :: " + e.getMessage());
+		}
 	}
+	
+	//findAllVO
+	
+	//------------
 
 	public Long count() {
 		Long totalCategorias = categoriaRepository.count();
