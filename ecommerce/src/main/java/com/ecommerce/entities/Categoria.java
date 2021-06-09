@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "categoria")
 public class Categoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_categoria")
@@ -28,12 +28,12 @@ public class Categoria {
 	@OneToMany(mappedBy = "categoria")
 	private List<Produto> listProduto;
 
-	public Integer getId() {
+	public Integer getIdCategoria() {
 		return idCategoria;
 	}
 
-	public void setId(Integer id) {
-		this.idCategoria = id;
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 
 	public String getNome() {

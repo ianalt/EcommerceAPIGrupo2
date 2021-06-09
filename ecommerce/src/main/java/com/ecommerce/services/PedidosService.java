@@ -3,6 +3,8 @@ package com.ecommerce.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.entities.Pedidos;
@@ -18,9 +20,26 @@ public class PedidosService {
 		return pedidos;
 	}
 
-	public List<Pedidos> findAll() {
-		List<Pedidos> listaPedidos = pedidosRepository.findAll();
-		return listaPedidos;
+	public List<Pedidos> findAll(Integer pagina, Integer qtdRegistros) throws Exception {
+		Pageable page = null;
+		List<Pedidos> listaPedidos = null;
+		List<Pedidos> listaPedidosComPaginacao = null;
+
+		try {
+			if (null != pagina && null != qtdRegistros) {
+				page = PageRequest.of(pagina, qtdRegistros);
+				listaPedidosComPaginacao = pedidosRepository.findAll(page).getContent();
+
+				return listaPedidosComPaginacao;
+			} else {
+				listaPedidos = pedidosRepository.findAll();
+
+				return listaPedidos;
+			}
+		} catch (Exception e) {
+			throw new Exception("Não foi possível recuperar a lista de pedidos :: " + e.getMessage());
+		}
+
 	}
 
 	public Long count() {
@@ -30,7 +49,7 @@ public class PedidosService {
 
 	public Pedidos save(Pedidos pedido) {
 		Pedidos novoPedido = pedidosRepository.save(pedido);
-		if (novoPedido.getId() != null) {
+		if (novoPedido.getIdPedidos() != null) {
 			return novoPedido;
 		} else {
 			return null;
@@ -47,7 +66,7 @@ public class PedidosService {
 	}
 
 	public Pedidos update(Pedidos pedido, Integer id) {
-		pedido.setId(id);
+		pedido.setIdPedidos(id);
 		return pedidosRepository.save(pedido);
 	}
 }

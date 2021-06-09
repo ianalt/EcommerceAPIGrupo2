@@ -50,12 +50,12 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedidos> listPedidos;
 
-	public Integer getId() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 
-	public void setId(Integer id) {
-		this.idCliente = id;
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getEmail() {

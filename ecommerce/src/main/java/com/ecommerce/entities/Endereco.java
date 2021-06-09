@@ -44,12 +44,12 @@ public class Endereco {
 	@OneToMany(mappedBy = "endereco")
 	private List<Cliente> listClient;
 
-	public Integer getId() {
+	public Integer getIdEndereco() {
 		return idEndereco;
 	}
 
-	public void setId(Integer id) {
-		this.idEndereco = id;
+	public void setIdEndereco(Integer idEndereco) {
+		this.idEndereco = idEndereco;
 	}
 
 	public String getCep() {

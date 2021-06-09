@@ -2,8 +2,7 @@ package com.ecommerce.entities;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,14 +40,14 @@ public class Pedidos {
 
 	// essa é a lista?
 	@OneToMany(mappedBy = "pedidosId")
-	private Set<ProdutosPedidos> setProdutosPedidos = new HashSet<>();
+	private List<ProdutosPedidos> listProdutosPedidos;
 
-	public Integer getId() {
+	public Integer getIdPedidos() {
 		return idPedidos;
 	}
 
-	public void setId(Integer id) {
-		this.idPedidos = id;
+	public void setIdPedidos(Integer idPedidos) {
+		this.idPedidos = idPedidos;
 	}
 
 	public Integer getNumeroPedido() {
@@ -83,20 +82,20 @@ public class Pedidos {
 		this.status = status;
 	}
 
-	public Cliente getClient() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setClient(Cliente client) {
-		this.cliente = client;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public Set<ProdutosPedidos> getSetProdutosPedidos() {
-		return setProdutosPedidos;
+	public List<ProdutosPedidos> getListProdutosPedidos() {
+		return listProdutosPedidos;
 	}
 
-	public void setSetProdutosPedidos(Set<ProdutosPedidos> setProdutosPedidos) {
-		this.setProdutosPedidos = setProdutosPedidos;
+	public void setListProdutosPedidos(List<ProdutosPedidos> listProdutosPedidos) {
+		this.listProdutosPedidos = listProdutosPedidos;
 	}
 
 }

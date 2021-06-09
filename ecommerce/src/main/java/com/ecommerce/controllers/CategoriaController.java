@@ -26,13 +26,27 @@ public class CategoriaController {
 	@Autowired
 	private CategoriaService categoriaService;
 
-
 	// findById
 	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		return new ResponseEntity<>(categoriaService.findById(id), headers, HttpStatus.OK);
+	}
+
+	// findByNome
+	@GetMapping("/{nome}")
+	public ResponseEntity<Categoria> findByNome(@PathVariable String nome) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Categoria categoria = categoriaService.findByNome(nome);
+
+		if (null != categoria) {
+			return new ResponseEntity<>(categoria, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(categoria, headers, HttpStatus.BAD_REQUEST);
+		}
+
 	}
 
 	// findAll
@@ -77,7 +91,6 @@ public class CategoriaController {
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
 
-		
 	}
 
 	// update

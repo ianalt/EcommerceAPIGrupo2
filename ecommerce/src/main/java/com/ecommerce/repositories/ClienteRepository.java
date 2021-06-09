@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.ecommerce.entities.Cliente;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Cliente, Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
+	Cliente findByUsernameAndSenha(String username, String senha); 
 }

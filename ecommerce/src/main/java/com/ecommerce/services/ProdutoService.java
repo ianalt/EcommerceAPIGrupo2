@@ -3,6 +3,8 @@ package com.ecommerce.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.entities.Produto;
@@ -18,9 +20,30 @@ public class ProdutoService {
 		return produto;
 	}
 
-	public List<Produto> findAll() {
-		List<Produto> listaProduto = produtoRepository.findAll();
-		return listaProduto;
+	public Produto findByNome(String nome) {
+		Produto produto = produtoRepository.findByNome(nome);
+		return produto;
+	}
+
+	public List<Produto> findAll(Integer pagina, Integer qtdRegistros) throws Exception {
+		Pageable page = null;
+		List<Produto> listaProduto = null;
+		List<Produto> listaProdutoComPaginacao = null;
+
+		try {
+			if (null != pagina && null != qtdRegistros) {
+				page = PageRequest.of(pagina, qtdRegistros);
+				listaProdutoComPaginacao = produtoRepository.findAll(page).getContent();
+
+				return listaProdutoComPaginacao;
+			} else {
+				listaProduto = produtoRepository.findAll();
+
+				return listaProduto;
+			}
+		} catch (Exception e) {
+			throw new Exception("Não foi possível recuperar a lista de produtos :: " + e.getMessage());
+		}
 	}
 
 	public Long count() {
@@ -30,7 +53,7 @@ public class ProdutoService {
 
 	public Produto save(Produto produto) {
 		Produto novoProduto = produtoRepository.save(produto);
-		if (novoProduto.getId() != null) {
+		if (novoProduto.getIdProduto() != null) {
 			return novoProduto;
 		} else {
 			return null;
@@ -47,7 +70,7 @@ public class ProdutoService {
 	}
 
 	public Produto update(Produto produto, Integer id) {
-		produto.setId(id);
+		produto.setIdProduto(id);
 		return produtoRepository.save(produto);
 	}
 }

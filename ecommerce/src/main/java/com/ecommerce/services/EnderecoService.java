@@ -30,7 +30,7 @@ public class EnderecoService {
 
 	public Endereco save(Endereco endereco) {
 		Endereco novoEndereco = enderecoRepository.save(endereco);
-		if (novoEndereco.getId() != null) {
+		if (novoEndereco.getIdEndereco() != null) {
 			return novoEndereco;
 		} else {
 			return null;
@@ -47,7 +47,7 @@ public class EnderecoService {
 	}
 
 	public Endereco update(Endereco endereco, Integer id) {
-		endereco.setId(id);
+		endereco.setIdEndereco(id);
 		return enderecoRepository.save(endereco);
 	}
 }

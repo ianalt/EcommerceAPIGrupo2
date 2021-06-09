@@ -2,8 +2,7 @@ package com.ecommerce.entities;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "produto")
 public class Produto {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
@@ -41,20 +41,19 @@ public class Produto {
 	@Column(name = "imagem")
 	private String imagem;
 
-	// relacionamento produto-categoria
 	@ManyToOne
 	@JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
 	private Categoria categoria;
 
 	@OneToMany(mappedBy = "produtoId")
-	private Set<ProdutosPedidos> setProdutosPedidos = new HashSet<>();
+	private List<ProdutosPedidos> listProdutosPedidos;
 
-	public Integer getId() {
+	public Integer getIdProduto() {
 		return idProduto;
 	}
 
-	public void setId(Integer id) {
-		this.idProduto = id;
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	public String getNome() {
@@ -113,12 +112,12 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	public Set<ProdutosPedidos> getSetProdutosPedidos() {
-		return setProdutosPedidos;
+	public List<ProdutosPedidos> getListProdutosPedidos() {
+		return listProdutosPedidos;
 	}
 
-	public void setSetProdutosPedidos(Set<ProdutosPedidos> setProdutosPedidos) {
-		this.setProdutosPedidos = setProdutosPedidos;
+	public void setListProdutosPedidos(List<ProdutosPedidos> listProdutosPedidos) {
+		this.listProdutosPedidos = listProdutosPedidos;
 	}
 
 }
