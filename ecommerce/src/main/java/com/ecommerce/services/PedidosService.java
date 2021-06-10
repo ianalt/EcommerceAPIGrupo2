@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.entities.Cliente;
 import com.ecommerce.entities.Pedidos;
 import com.ecommerce.repositories.PedidosRepository;
 
@@ -16,8 +17,15 @@ public class PedidosService {
 	public PedidosRepository pedidosRepository;
 
 	public Pedidos findById(Integer id) {
-		Pedidos pedidos = pedidosRepository.findById(id).get();
-		return pedidos;
+		Pedidos pedido = pedidosRepository.findById(id).get();
+		return pedido;
+	}
+
+
+	public Pedidos findByCliente(Cliente cliente){
+		Pedidos pedido = pedidosRepository.findByCliente(cliente);
+		return pedido;
+
 	}
 
 	public List<Pedidos> findAll(Integer pagina, Integer qtdRegistros) throws Exception {

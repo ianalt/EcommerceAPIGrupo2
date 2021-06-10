@@ -62,7 +62,7 @@ public class ClienteController {
 
 	// delete
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Cliente> delete(@RequestParam Integer id) {
+	public ResponseEntity<Cliente> delete(@PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		boolean foiRemovido = clienteService.delete(id);

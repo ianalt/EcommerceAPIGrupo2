@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "categoria")
 public class Categoria {
@@ -25,7 +27,9 @@ public class Categoria {
 	@Column(name = "descricao")
 	private String descricao;
 
+
 	@OneToMany(mappedBy = "categoria")
+	@JsonBackReference
 	private List<Produto> listProduto;
 
 	public Integer getIdCategoria() {

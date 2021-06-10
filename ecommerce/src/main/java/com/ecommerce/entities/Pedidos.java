@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "pedidos")
 public class Pedidos {
@@ -40,6 +42,7 @@ public class Pedidos {
 
 	// essa é a lista?
 	@OneToMany(mappedBy = "pedidosId")
+	@JsonBackReference
 	private List<ProdutosPedidos> listProdutosPedidos;
 
 	public Integer getIdPedidos() {

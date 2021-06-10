@@ -65,7 +65,7 @@ public class ProdutoController {
 
 	// delete
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Produto> delete(@RequestParam Integer id) {
+	public ResponseEntity<Produto> delete(@PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		boolean foiRemovido = produtoService.delete(id);

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecommerce.entities.Cliente;
 import com.ecommerce.entities.Pedidos;
 import com.ecommerce.services.PedidosService;
 
@@ -31,6 +32,12 @@ public class PedidosController {
 		HttpHeaders headers = new HttpHeaders();
 
 		return new ResponseEntity<>(pedidosService.findById(id), headers, HttpStatus.OK);
+	}
+
+	@GetMapping("/cliente/{cliente}")
+	public ResponseEntity <Pedidos> findByCliente(@PathVariable Cliente cliente){
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(pedidosService.findByCliente(cliente), headers, HttpStatus.OK);
 	}
 
 	// findAll
@@ -64,7 +71,7 @@ public class PedidosController {
 
 	// delete
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Pedidos> delete(@RequestParam Integer id) {
+	public ResponseEntity<Pedidos> delete(@PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		boolean foiRemovido = pedidosService.delete(id);

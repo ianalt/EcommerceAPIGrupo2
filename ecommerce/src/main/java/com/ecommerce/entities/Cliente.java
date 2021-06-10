@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -45,6 +48,7 @@ public class Cliente {
 	// relacionamento client-endereco
 	@ManyToOne
 	@JoinColumn(name = "id_endereco", referencedColumnName = "id_endereco")
+	// @JsonManagedReference
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "cliente")

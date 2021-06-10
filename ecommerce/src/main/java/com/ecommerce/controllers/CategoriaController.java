@@ -27,12 +27,12 @@ public class CategoriaController {
 	private CategoriaService categoriaService;
 
 	// findById
-	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
-		HttpHeaders headers = new HttpHeaders();
+	// @GetMapping("/{id}")
+	// public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
+	// 	HttpHeaders headers = new HttpHeaders();
 
-		return new ResponseEntity<>(categoriaService.findById(id), headers, HttpStatus.OK);
-	}
+	// 	return new ResponseEntity<>(categoriaService.findById(id), headers, HttpStatus.OK);
+	// }
 
 	// findByNome
 	@GetMapping("/{nome}")
@@ -80,7 +80,7 @@ public class CategoriaController {
 
 	// delete
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Categoria> delete(@RequestParam Integer id) {
+	public ResponseEntity<Categoria> delete(@PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		boolean foiRemovido = categoriaService.delete(id);

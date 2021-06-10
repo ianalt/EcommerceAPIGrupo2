@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "endereco")
 public class Endereco {
@@ -42,6 +44,7 @@ public class Endereco {
 
 	// relacionamento endereco-client
 	@OneToMany(mappedBy = "endereco")
+	@JsonBackReference
 	private List<Cliente> listClient;
 
 	public Integer getIdEndereco() {
