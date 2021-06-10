@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -27,9 +28,11 @@ public class Cliente {
 	@Column(name = "email")
 	private String email;
 
+	@NotBlank(message = "Nome de usuário é obrigatório")
 	@Column(name = "username", unique = true)
 	private String username;
 
+	@NotBlank(message = "Senha de usuário é obrigatória")
 	@Column(name = "senha")
 	private String senha;
 
@@ -52,6 +55,7 @@ public class Cliente {
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "cliente")
+	// @JsonBackReference
 	private List<Pedidos> listPedidos;
 
 	public Integer getIdCliente() {

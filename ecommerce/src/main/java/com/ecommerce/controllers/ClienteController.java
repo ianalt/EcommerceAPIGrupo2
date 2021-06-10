@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 import com.ecommerce.entities.Cliente;
 import com.ecommerce.services.ClienteService;
 
@@ -33,7 +35,7 @@ public class ClienteController {
 
 	// findByUsernameAndSenha
 	@GetMapping("/{username}/{senha}")
-	public ResponseEntity<Cliente> findByUsernameAndSenha(@PathVariable String username, @PathVariable String senha) {
+	public ResponseEntity<Cliente> findByUsernameAndSenha(@PathVariable String username,@PathVariable String senha) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Cliente cliente = clienteService.findByUsernameAndSenha(username, senha);
@@ -48,7 +50,7 @@ public class ClienteController {
 
 	// save
 	@PostMapping
-	public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
+	public ResponseEntity<Cliente> save(@Valid @RequestBody Cliente cliente) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Cliente novoCliente = clienteService.save(cliente);
