@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 // import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -22,7 +23,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "cliente")
 public class Cliente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
@@ -30,12 +31,13 @@ public class Cliente {
 
 	@NotBlank
 	@Email(message = "E-mail fornecido não e valido")
+	@Pattern(regexp = ".+@.+\\..+", message = "E-mail fornecido não e valido")
 	@Column(name = "email")
 	private String email;
 
 	@NotBlank(message = "Nome de usuário é obrigatório")
-	@Size( max = 20, message = "Nome de usuario excede o limite de {max} caracteres")
-	@Size( min = 4, message = "Nome de usuário precisa ser maior que {min} caracteres")
+	@Size(max = 20, message = "Nome de usuario excede o limite de {max} caracteres")
+	@Size(min = 4, message = "Nome de usuário precisa ser maior que {min} caracteres")
 	@Column(name = "username", unique = true)
 	private String username;
 
