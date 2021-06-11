@@ -1,55 +1,21 @@
-package com.ecommerce.entities;
+package com.ecommerce.vo;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.ecommerce.entities.Categoria;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-@Entity
-@Table(name = "produto")
-public class Produto {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_produto")
+public class ProdutoVO {
 	private Integer idProduto;
-
-	@Column(name = "nome")
 	private String nome;
-
-	@Column(name = "descricao")
 	private String descricao;
-
-	@Column(name = "preco")
 	private BigDecimal preco;
-
-	@Column(name = "qtdestoque")
 	private Integer qtdEstoque;
-
-	@Column(name = "datacadastro")
 	private Calendar dataCadastro;
-
-	@Column(name = "imagem")
 	private String imagem;
-
-	@ManyToOne
-	@JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
 	private Categoria categoria;
-
-	@OneToMany(mappedBy = "produtoId")
-	@JsonBackReference
-	private List<ProdutosPedidos> listProdutosPedidos;
+	private List<ProdutosPedidosVO> listProdutosPedidosVO;
 
 	public Integer getIdProduto() {
 		return idProduto;
@@ -115,12 +81,12 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-	public List<ProdutosPedidos> getListProdutosPedidos() {
-		return listProdutosPedidos;
+	public List<ProdutosPedidosVO> getListProdutosPedidosVO() {
+		return listProdutosPedidosVO;
 	}
 
-	public void setListProdutosPedidos(List<ProdutosPedidos> listProdutosPedidos) {
-		this.listProdutosPedidos = listProdutosPedidos;
+	public void setListProdutosPedidosVO(List<ProdutosPedidosVO> listProdutosPedidosVO) {
+		this.listProdutosPedidosVO = listProdutosPedidosVO;
 	}
 
 }

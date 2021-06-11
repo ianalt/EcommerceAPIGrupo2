@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.entities.Produto;
 import com.ecommerce.services.ProdutoService;
+import com.ecommerce.vo.ProdutoVO;
 
 @RestController
 @RequestMapping("/produto")
@@ -48,6 +49,15 @@ public class ProdutoController {
 
 		return new ResponseEntity<>(produtoService.findAll(pagina, qtdRegistros), headers, HttpStatus.OK);
 	}
+
+	// findAllVO
+//	@GetMapping("/findAllVO")
+//	public ResponseEntity<List<ProdutoVO>> findAllVO(@RequestParam(required = false) Integer pagina,
+//			@RequestParam(required = false) Integer qtdRegistros) throws Exception {
+//		HttpHeaders headers = new HttpHeaders();
+//
+//		return new ResponseEntity<>(produtoService.findAllVO(pagina, qtdRegistros), headers, HttpStatus.OK);
+//	}
 
 	// save
 	@PostMapping
