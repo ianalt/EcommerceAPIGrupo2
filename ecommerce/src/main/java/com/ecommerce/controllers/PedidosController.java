@@ -86,7 +86,7 @@ public class PedidosController {
 
 	// update
 	@PutMapping("/{id}")
-	public ResponseEntity<Pedidos> update(@RequestBody Pedidos pedido, @RequestParam Integer id) {
+	public ResponseEntity<Pedidos> update(@RequestBody Pedidos pedido, @PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Pedidos pedidoAtualizado = pedidosService.update(pedido, id);

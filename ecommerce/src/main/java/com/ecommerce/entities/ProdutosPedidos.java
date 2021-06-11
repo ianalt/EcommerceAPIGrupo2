@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 @Entity
 @Table(name = "produtospedidos")
 public class ProdutosPedidos {
@@ -20,10 +22,12 @@ public class ProdutosPedidos {
 	private Integer idProdutosPedidos;
 
 	@ManyToOne
+	@JsonDeserialize  // @JsonManagedReference
 	@JoinColumn(name = "id_produto", referencedColumnName = "id_produto")
 	private Produto produtoId;
 
 	@ManyToOne
+	@JsonDeserialize  // @JsonManagedReference
 	@JoinColumn(name = "id_pedidos", referencedColumnName = "id_pedidos")
 	private Pedidos pedidosId;
 

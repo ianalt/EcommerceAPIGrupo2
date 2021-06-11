@@ -17,6 +17,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 // import com.fasterxml.jackson.annotation.JsonBackReference;
 // import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -59,12 +62,13 @@ public class Cliente {
 
 	// relacionamento client-endereco
 	@ManyToOne
+	@JsonDeserialize  // @JsonManagedReference
 	@JoinColumn(name = "id_endereco", referencedColumnName = "id_endereco")
-	// @JsonManagedReference
 	private Endereco endereco;
 
+	//recursividade
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente")
-	// @JsonBackReference
 	private List<Pedidos> listPedidos;
 
 	public Integer getIdCliente() {

@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 @Table(name = "pedidos")
@@ -39,12 +40,12 @@ public class Pedidos {
 
 	@ManyToOne
 	@JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
-	// @JsonManagedReference
+	@JsonDeserialize  // @JsonManagedReference //problemas com ele 
 	private Cliente cliente;
 
 	// essa é a lista?
 	@OneToMany(mappedBy = "pedidosId")
-	// @JsonBackReference
+	@JsonBackReference
 	private List<ProdutosPedidos> listProdutosPedidos;
 
 	public Integer getIdPedidos() {

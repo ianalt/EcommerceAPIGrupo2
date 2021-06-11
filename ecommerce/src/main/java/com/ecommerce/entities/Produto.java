@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 @Table(name = "produto")
@@ -44,11 +45,12 @@ public class Produto {
 	private String imagem;
 
 	@ManyToOne
+	@JsonDeserialize  // @JsonManagedReference
 	@JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
 	private Categoria categoria;
 
-	@OneToMany(mappedBy = "produtoId")
 	@JsonBackReference
+	@OneToMany(mappedBy = "produtoId")
 	private List<ProdutosPedidos> listProdutosPedidos;
 
 	public Integer getIdProduto() {

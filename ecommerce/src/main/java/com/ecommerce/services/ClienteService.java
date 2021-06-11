@@ -87,9 +87,20 @@ public class ClienteService {
 		}
 	}
 
-	public Cliente update(Cliente cliente, Integer id) {
-		cliente.setIdCliente(id);
-		return clienteRepository.save(cliente);
+	public Cliente update(Cliente cliente, Integer id) {	
+			
+		Cliente clienteAtt =  clienteRepository.findById(id).get();
+
+		clienteAtt.setDataNascimento(cliente.getDataNascimento());
+		clienteAtt.setEmail(cliente.getEmail());
+		clienteAtt.setEndereco(cliente.getEndereco());
+		clienteAtt.setNome(cliente.getNome());
+		clienteAtt.setSenha(cliente.getSenha());
+		clienteAtt.setTelefone(cliente.getTelefone());
+		clienteAtt.setUsername(cliente.getUsername());
+
+
+		return clienteRepository.save(clienteAtt);
 	}
 	
 //	public ClienteVO updateVO(ClienteVO clienteVO, Integer id) {

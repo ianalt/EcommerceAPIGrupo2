@@ -73,8 +73,28 @@ public class PedidosService {
 		}
 	}
 
-	public Pedidos update(Pedidos pedido, Integer id) {
-		pedido.setIdPedidos(id);
-		return pedidosRepository.save(pedido);
-	}
+	// public Pedidos update(Pedidos pedidos, Integer id) {
+		
+
+		public Pedidos update(Pedidos pedido, Integer id) {
+			pedido.setIdPedidos(id);
+			return pedidosRepository.save(pedido);
+		}
+
+	// 	Pedidos pedidosAtt =  pedidosRepository.findById(id).get();
+
+	// 	pedidosAtt.setTotalPedido(pedidos.getTotalPedido());
+	// 	pedidosAtt.setDataPedido(pedidos.getDataPedido());
+	// 	pedidosAtt.setNumeroPedido(pedidos.getNumeroPedido());
+	// 	pedidosAtt.setCliente(pedidos.getCliente());
+	// 	pedidosAtt.setStatus(pedidos.getStatus());
+
+	// 	// if (pedidosAtt.getStatus().equalsIgnoreCase("aberto") {
+	// 	// 	pedidosAtt.setStatus(pedidos.getStatus());
+	// 	// }else{
+	// 	// 	pedidosAtt.setStatus("fechado");
+	// 	// }
+
+	// 	return pedidosRepository.save(pedidosAtt);
+	// }
 }

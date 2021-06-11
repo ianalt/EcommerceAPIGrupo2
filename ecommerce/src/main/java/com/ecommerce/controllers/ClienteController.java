@@ -79,7 +79,7 @@ public class ClienteController {
 
 	// update
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> update(@RequestBody Cliente cliente, @RequestParam Integer id) {
+	public ResponseEntity<Cliente> update(@RequestBody Cliente cliente, @PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Cliente clienteAtualizado = clienteService.update(cliente, id);
