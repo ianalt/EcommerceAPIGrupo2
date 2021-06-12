@@ -1,5 +1,11 @@
 package com.ecommerce.controllers;
 
+import javax.validation.Valid;
+
+import com.ecommerce.entities.Cliente;
+import com.ecommerce.services.ClienteService;
+import com.ecommerce.vo.DadosCEPVO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,13 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-
-import com.ecommerce.entities.Cliente;
-import com.ecommerce.services.ClienteService;
 
 @RestController
 @RequestMapping("/cliente")
@@ -32,6 +32,20 @@ public class ClienteController {
 
 		return new ResponseEntity<>(clienteService.findById(id), headers, HttpStatus.OK);
 	}
+
+	@GetMapping("/cep/{cep}")
+	public ResponseEntity<DadosCEPVO> DadosCEPVO(@PathVariable String cep){
+		HttpHeaders headers = new HttpHeaders();
+
+		return new ResponseEntity<>(clienteService.consultarDadosPorCEP(cep), headers, HttpStatus.OK);
+	}
+
+	// @GetMapping("/cnpj/{cnpj}")
+	// public ResponseEntity<ReceitaWsDadosCnpjVO> consultarDadosPorCnpj(@PathVariable String cnpj){
+	// 	HttpHeaders headers = new HttpHeaders();
+
+	// 	return new ResponseEntity<>(clienteService.consultarDadosPorCnpj(cnpj), headers, HttpStatus.OK);
+	// }
 
 	// findByUsernameAndSenha
 	@GetMapping("/{username}/{senha}")

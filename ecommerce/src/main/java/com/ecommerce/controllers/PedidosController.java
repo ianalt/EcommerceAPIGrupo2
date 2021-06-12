@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecommerce.entities.Cliente;
 import com.ecommerce.entities.Pedidos;
 import com.ecommerce.services.PedidosService;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -27,12 +28,12 @@ public class PedidosController {
 	private PedidosService pedidosService;
 
 	// findById
-	@GetMapping("/{id}")
-	public ResponseEntity<Pedidos> findById(@PathVariable Integer id) {
-		HttpHeaders headers = new HttpHeaders();
+	// @GetMapping("/{id}")
+	// public ResponseEntity<Pedidos> findById(@PathVariable Integer id) {
+	// 	HttpHeaders headers = new HttpHeaders();
 
-		return new ResponseEntity<>(pedidosService.findById(id), headers, HttpStatus.OK);
-	}
+	// 	return new ResponseEntity<>(pedidosService.findById(id), headers, HttpStatus.OK);
+	// }
 
 	@GetMapping("/cliente/{cliente}")
 	public ResponseEntity <Pedidos> findByCliente(@PathVariable Cliente cliente){
@@ -41,7 +42,7 @@ public class PedidosController {
 	}
 
 	// findAll
-	@GetMapping
+	@GetMapping("/{id}")
 	public ResponseEntity<List<Pedidos>> findAll(@RequestParam(required = false) Integer pagina,
 			@RequestParam(required = false) Integer qtdRegistros) throws Exception {
 		HttpHeaders headers = new HttpHeaders();

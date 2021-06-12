@@ -31,7 +31,7 @@ public class ProdutoController {
 	public ResponseEntity<Produto> findByNome(@PathVariable String nome) {
 		HttpHeaders headers = new HttpHeaders();
 
-		Produto produto = produtoService.findByNome(nome);
+		Produto produto = produtoService.findByNome(nome.toLowerCase());
 
 		if (null != produto) {
 			return new ResponseEntity<>(produto, headers, HttpStatus.OK);
@@ -90,7 +90,7 @@ public class ProdutoController {
 
 	// update
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> update(@RequestBody Produto produto, @RequestParam Integer id) {
+	public ResponseEntity<Produto> update(@RequestBody Produto produto, @PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Produto produtoAtualizado = produtoService.update(produto, id);

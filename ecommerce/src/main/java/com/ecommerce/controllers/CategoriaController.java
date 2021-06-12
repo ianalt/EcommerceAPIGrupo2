@@ -95,7 +95,7 @@ public class CategoriaController {
 
 	// update
 	@PutMapping("/{id}")
-	public ResponseEntity<Categoria> update(@RequestBody Categoria categoria, @RequestParam Integer id) {
+	public ResponseEntity<Categoria> update(@RequestBody Categoria categoria, @PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Categoria categoriaAtualizada = categoriaService.update(categoria, id);

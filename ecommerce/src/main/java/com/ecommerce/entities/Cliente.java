@@ -48,7 +48,7 @@ public class Cliente {
 	@Column(name = "senha")
 	private String senha;
 
-	@Column(name = "nome")
+	@Column(name = "nome")//colocar unique
 	private String nome;
 
 	@Column(name = "cpf")

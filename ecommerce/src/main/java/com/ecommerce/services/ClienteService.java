@@ -1,23 +1,26 @@
 package com.ecommerce.services;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.ecommerce.entities.Cliente;
+import com.ecommerce.entities.Endereco;
+import com.ecommerce.repositories.ClienteRepository;
+import com.ecommerce.repositories.EnderecoRepository;
+import com.ecommerce.vo.DadosCEPVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ecommerce.entities.Cliente;
-import com.ecommerce.entities.Pedidos;
-import com.ecommerce.repositories.ClienteRepository;
-import com.ecommerce.vo.ClienteVO;
-import com.ecommerce.vo.PedidosVO;
+import org.springframework.web.client.RestTemplate;
 
 @Service
-public class ClienteService {
+public class ClienteService implements Serializable{
 	@Autowired
 	public ClienteRepository clienteRepository;
 	
-	
+	@Autowired
+	public EnderecoRepository enderecoRepository;
 //	public ClienteVO convertEntidadeParaVO(Cliente cliente) {
 //		
 //		ClienteVO clienteVO = new ClienteVO();
@@ -70,9 +73,37 @@ public class ClienteService {
 	}
 
 	public Cliente save(Cliente cliente) {
+
+		
+		if(consultarDadosPorCEP(cliente.getEndereco().getCep()).getCep() != null){
+
+
+		DadosCEPVO cepVO = consultarDadosPorCEP(cliente.getEndereco().getCep());
+			
+		Endereco novoEndereco = enderecoRepository.save(cliente.getEndereco());
+
+
+		novoEndereco.setBairro(cepVO.getBairro());
+		novoEndereco.setCep(cepVO.getCep());
+		novoEndereco.setCidade(cepVO.getLocalidade());
+		novoEndereco.setEstado(cepVO.getUf());
+		novoEndereco.setComplemento(cepVO.getComplemento());
+		novoEndereco.setNumero(cliente.getEndereco().getNumero());
+		novoEndereco.setRua(cepVO.getLogradouro());
+		
+		
+		
 		Cliente novoCliente = clienteRepository.save(cliente);
+		
 		if (novoCliente.getIdCliente() != null) {
-			return novoCliente;
+
+				novoCliente.setEndereco(novoEndereco);
+				return novoCliente;
+
+			}else{
+				return null;
+			}
+
 		} else {
 			return null;
 		}
@@ -107,5 +138,27 @@ public class ClienteService {
 //		clienteVO.setIdCliente(id);
 //		return clienteRepository.save(clienteVO);
 //	}
+
+	public DadosCEPVO consultarDadosPorCEP(String cep) {
+		RestTemplate restTemplate = new RestTemplate();
+		String uri = "https://viacep.com.br/ws/{cep}/json";	
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cep", cep);
+			
+		DadosCEPVO dadosCEPVO = restTemplate.getForObject(uri, DadosCEPVO.class, params);
+			
+		return dadosCEPVO;
+	}
+
+	// public ReceitaWsDadosCnpjVO consultarDadosPorCnpj(String cnpj) {
+	// 	RestTemplate restTemplate = new RestTemplate();
+	// 	String uri = "https://www.receitaws.com.br/v1/cnpj/{cnpj}";	
+	// 	Map<String, String> params = new HashMap<String, String>();
+	// 	params.put("cnpj", cnpj);
+			
+	// 	ReceitaWsDadosCnpjVO receitaWsDadosCnpjVO = restTemplate.getForObject(uri, ReceitaWsDadosCnpjVO.class, params);
+			
+	// 	return receitaWsDadosCnpjVO;
+	//   }
 
 }

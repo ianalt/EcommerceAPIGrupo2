@@ -78,15 +78,18 @@ public class PedidosService {
 
 		Pedidos pedidosAtt =  pedidosRepository.findById(id).get();
 
-		pedidosAtt.setTotalPedido(pedidos.getTotalPedido());
-		pedidosAtt.setDataPedido(pedidos.getDataPedido());
-		pedidosAtt.setNumeroPedido(pedidos.getNumeroPedido());
-		pedidosAtt.setCliente(pedidos.getCliente());
 
 		if (pedidosAtt.getStatus().equalsIgnoreCase("aberto")){
 			pedidosAtt.setStatus(pedidos.getStatus());
+			
+			pedidosAtt.setTotalPedido(pedidos.getTotalPedido());
+			pedidosAtt.setDataPedido(pedidos.getDataPedido());
+			pedidosAtt.setNumeroPedido(pedidos.getNumeroPedido());
+			// pedidosAtt.setCliente(pedidos.getCliente());
 		}else{
 			pedidosAtt.setStatus("fechado");
+
+			//Adicionar o metodo de email
 		}
 
 		return pedidosRepository.save(pedidosAtt);
