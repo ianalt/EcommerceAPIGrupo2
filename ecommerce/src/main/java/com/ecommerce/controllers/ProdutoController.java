@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.entities.Produto;
 import com.ecommerce.services.ProdutoService;
-import com.ecommerce.vo.ProdutoVO;
 
 @RestController
 @RequestMapping("/produto")

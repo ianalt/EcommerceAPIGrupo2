@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.ecommerce.entities.Endereco;
-import com.ecommerce.entities.Pedidos;
 
 public class ClienteVO {
 	private Integer idCliente;

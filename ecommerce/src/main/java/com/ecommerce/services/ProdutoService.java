@@ -1,7 +1,6 @@
 
 package com.ecommerce.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.entities.Produto;
-import com.ecommerce.entities.ProdutosPedidos;
 import com.ecommerce.repositories.ProdutoRepository;
-import com.ecommerce.vo.ProdutoVO;
-import com.ecommerce.vo.ProdutosPedidosVO;
 
 @Service
 public class ProdutoService {

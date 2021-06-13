@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecommerce.entities.Cliente;
 import com.ecommerce.entities.Pedidos;
 import com.ecommerce.services.PedidosService;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 @RestController
 @RequestMapping("/pedidos")
