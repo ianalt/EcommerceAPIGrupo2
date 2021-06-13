@@ -18,6 +18,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ClienteService implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	public ClienteRepository clienteRepository;
 	
@@ -121,7 +126,7 @@ public class ClienteService implements Serializable{
 		DadosCEPVO cepVO = consultarDadosPorCEP(cliente.getEndereco().getCep());
 		
 		for(Endereco clientelist : enderecoRepository.findAll()){
-			if(clientelist.getCep() == cliente.getEndereco().getCep()){
+			if(clientelist.getCep() != cliente.getEndereco().getCep()){
 				igual = true;
 			}
 		}
@@ -137,7 +142,8 @@ public class ClienteService implements Serializable{
 			novoEndereco.setComplemento(cepVO.getComplemento());
 			novoEndereco.setNumero(cliente.getEndereco().getNumero());
 			novoEndereco.setRua(cepVO.getLogradouro());
-
+			
+			
 			return novoEndereco;
 		}
 	}

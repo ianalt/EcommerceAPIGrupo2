@@ -60,5 +60,8 @@ public class EnderecoService {
 		endereco.setRua(dadosCEP.getLogradouro());
 
 		return enderecoRepository.save(endereco);
+		
+		
+		
 	}
 }

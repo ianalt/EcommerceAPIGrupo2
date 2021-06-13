@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -24,7 +25,8 @@ public class Endereco {
 
 	@Size(max = 9, min = 9, message = "O CEP precisa ter 8 digitos")
 	@NotBlank(message = "O campo CEP não pode estar vazio")
-	@Column(name = "cep")
+//	@Pattern(regexp = ".+-.", message = "E-mail fornecido não e valido")
+	@Column(name = "cep", unique = true)
 	private String cep;
 
 	@Column(name = "rua")
@@ -36,7 +38,7 @@ public class Endereco {
 	@Column(name = "cidade")
 	private String cidade;
 
-	// coloquei como string poruqe pode ser, por exemplo: 1875B
+	// coloquei como string porque pode ser, por exemplo: 1875B
 	@Column(name = "numero")
 	private String numero;
 
