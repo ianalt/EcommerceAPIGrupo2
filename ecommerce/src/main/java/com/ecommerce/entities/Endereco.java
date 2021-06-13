@@ -25,7 +25,7 @@ public class Endereco {
 
 	@Size(max = 9, min = 9, message = "O CEP precisa ter 8 digitos")
 	@NotBlank(message = "O campo CEP não pode estar vazio")
-//	@Pattern(regexp = ".+-.", message = "E-mail fornecido não e valido")
+	// @Pattern(regexp = ".+-.", message = "E-mail fornecido não e valido")
 	@Column(name = "cep", unique = true)
 	private String cep;
 

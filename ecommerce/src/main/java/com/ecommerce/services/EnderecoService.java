@@ -32,15 +32,6 @@ public class EnderecoService {
 		return totalEnderecos;
 	}
 
-	public Endereco save(Endereco endereco) {
-		Endereco novoEndereco = enderecoRepository.save(endereco);
-		if (novoEndereco.getIdEndereco() != null) {
-			return novoEndereco;
-		} else {
-			return null;
-		}
-	}
-
 	public boolean delete(Integer id) {
 		if (id != null) {
 			enderecoRepository.deleteById(id);
@@ -49,9 +40,8 @@ public class EnderecoService {
 			return false;
 		}
 	}
-
-	public Endereco update(Endereco endereco, Integer id) {
-		endereco.setIdEndereco(id);
+	
+	public Endereco save(Endereco endereco) throws Exception {
 		DadosCEPVO dadosCEP = clienteService.consultarDadosPorCEP(endereco.getCep());
 
 		endereco.setBairro(dadosCEP.getBairro());
@@ -59,7 +49,32 @@ public class EnderecoService {
 		endereco.setEstado(dadosCEP.getUf());
 		endereco.setRua(dadosCEP.getLogradouro());
 
-		return enderecoRepository.save(endereco);
+		if(dadosCEP.getCep() == null){
+			throw new Exception("O CEP digitado é invalido");
+		}
+		Endereco novoEndereco = enderecoRepository.save(endereco);
+		if (novoEndereco.getIdEndereco() != null) {
+			return novoEndereco;
+		} else {
+			return null;
+		}
+	}
+
+	public Endereco update(Endereco endereco, Integer id) throws Exception {
+		endereco.setIdEndereco(id);
+		DadosCEPVO dadosCEP = clienteService.consultarDadosPorCEP(endereco.getCep());
+
+		if(dadosCEP.getCep() == null) {
+			throw new Exception("O CEP digitado é invalido");	
+		}
+			endereco.setBairro(dadosCEP.getBairro());
+			endereco.setCidade(dadosCEP.getLocalidade());
+			endereco.setEstado(dadosCEP.getUf());
+			endereco.setRua(dadosCEP.getLogradouro());
+				
+			return enderecoRepository.save(endereco);
+		
+		
 		
 		
 		

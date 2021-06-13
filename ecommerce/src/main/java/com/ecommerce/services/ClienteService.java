@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import com.ecommerce.entities.Cliente;
-import com.ecommerce.entities.Endereco;
 import com.ecommerce.repositories.ClienteRepository;
 import com.ecommerce.repositories.EnderecoRepository;
 import com.ecommerce.vo.DadosCEPVO;
@@ -83,69 +84,11 @@ public class ClienteService implements Serializable{
 		return cliente;
 	}
 
-	public Cliente save(Cliente cliente) {
+	public Cliente save(Cliente cliente) throws Exception {
 
-		
-		if(consultarDadosPorCEP(cliente.getEndereco().getCep()).getCep() != null){
-			
-			Endereco novoEndereco = enderecoRepository.save(cliente.getEndereco());
-			
-			DadosCEPVO cepVO = consultarDadosPorCEP(cliente.getEndereco().getCep());
+		enderecoService.save(cliente.getEndereco());
 
-			System.out.println(consultarDadosPorCEP(cliente.getEndereco().getCep()) + "marcado");
-
-			novoEndereco.setBairro(cepVO.getBairro());
-			novoEndereco.setCep(cepVO.getCep());
-			novoEndereco.setCidade(cepVO.getLocalidade());
-			novoEndereco.setEstado(cepVO.getUf());
-			novoEndereco.setComplemento(cepVO.getComplemento());
-			novoEndereco.setNumero(cliente.getEndereco().getNumero());
-			novoEndereco.setRua(cepVO.getLogradouro());
-			
-		
-			Cliente novoCliente = clienteRepository.save(cliente);
-		
-			if (novoCliente.getIdCliente() != null) {
-
-					novoCliente.setEndereco(novoEndereco);
-					return novoCliente;
-
-				}else{
-					return null;
-				}
-
-		} else {
-				return null;
-		}
-	}
-
-	public Endereco retornaCEP(Cliente cliente){
-		
-		boolean igual = false;
-
-		DadosCEPVO cepVO = consultarDadosPorCEP(cliente.getEndereco().getCep());
-		
-		for(Endereco clientelist : enderecoRepository.findAll()){
-			if(clientelist.getCep() != cliente.getEndereco().getCep()){
-				igual = true;
-			}
-		}
-		if(igual == true){
-			return cliente.getEndereco();
-		} else{
-			Endereco novoEndereco = enderecoRepository.save(cliente.getEndereco());
-
-			novoEndereco.setBairro(cepVO.getBairro());
-			novoEndereco.setCep(cepVO.getCep());
-			novoEndereco.setCidade(cepVO.getLocalidade());
-			novoEndereco.setEstado(cepVO.getUf());
-			novoEndereco.setComplemento(cepVO.getComplemento());
-			novoEndereco.setNumero(cliente.getEndereco().getNumero());
-			novoEndereco.setRua(cepVO.getLogradouro());
-			
-			
-			return novoEndereco;
-		}
+		return clienteRepository.save(cliente);
 	}
 
 	public boolean delete(Integer id) {
@@ -157,7 +100,7 @@ public class ClienteService implements Serializable{
 		}
 	}
 
-	public Cliente update(Cliente cliente, Integer id) {	
+	public Cliente update(Cliente cliente, Integer id) throws Exception {	
 		
 		Cliente clienteAtt =  clienteRepository.findById(id).get();
 

@@ -64,7 +64,7 @@ public class ClienteController {
 
 	// save
 	@PostMapping
-	public ResponseEntity<Cliente> save(@Valid @RequestBody Cliente cliente) {
+	public ResponseEntity<Cliente> save(@Valid @RequestBody Cliente cliente) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Cliente novoCliente = clienteService.save(cliente);
@@ -93,7 +93,7 @@ public class ClienteController {
 
 	// update
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> update(@Valid @RequestBody Cliente cliente, @PathVariable Integer id) {
+	public ResponseEntity<Cliente> update(@Valid @RequestBody Cliente cliente, @PathVariable Integer id) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Cliente clienteAtualizado = clienteService.update(cliente, id);
