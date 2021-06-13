@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -22,11 +23,12 @@ public class Categoria {
 	private Integer idCategoria;
 
 	@Column(name = "nome")
+	@NotBlank(message = "A categoria precisa ter um nome")
 	private String nome;
 
 	@Column(name = "descricao")
+	@NotBlank(message = "A categoria precisa ter uma descrição")
 	private String descricao;
-
 
 	@OneToMany(mappedBy = "categoria")
 	@JsonBackReference

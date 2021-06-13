@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -20,6 +22,8 @@ public class Endereco {
 	@Column(name = "id_endereco")
 	private Integer idEndereco;
 
+	@Size(max = 11, min = 11, message = "O CEP precisa ter 11 digitos")
+	@NotBlank(message = "O campo CEP não pode estar vazio")
 	@Column(name = "cep")
 	private String cep;
 

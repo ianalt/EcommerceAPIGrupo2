@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -26,15 +28,19 @@ public class Produto {
 	@Column(name = "id_produto")
 	private Integer idProduto;
 
+	@NotBlank(message = "O produto precisa possuir um nome")
 	@Column(name = "nome")
 	private String nome;
 
+	@NotBlank(message = "O produto precisa ter uma descrição")
 	@Column(name = "descricao")
 	private String descricao;
 
+	@Min(value = 0, message = "O preço do produto não pode ser inferior a zero")
 	@Column(name = "preco")
 	private BigDecimal preco;
 
+	@Min(value = 0, message = "A quantidade de produtos em estoque não pode ser inferior a zero")
 	@Column(name = "qtdestoque")
 	private Integer qtdEstoque;
 

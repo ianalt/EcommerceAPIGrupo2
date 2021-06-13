@@ -2,6 +2,8 @@ package com.ecommerce.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -60,7 +62,7 @@ public class ProdutoController {
 
 	// save
 	@PostMapping
-	public ResponseEntity<Produto> save(@RequestBody Produto produto) {
+	public ResponseEntity<Produto> save(@Valid @RequestBody Produto produto) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Produto novoProduto = produtoService.save(produto);

@@ -2,6 +2,8 @@ package com.ecommerce.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -66,7 +68,7 @@ public class CategoriaController {
 
 	// save
 	@PostMapping
-	public ResponseEntity<Categoria> save(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> save(@Valid @RequestBody Categoria categoria) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Categoria novaCategoria = categoriaService.save(categoria);
@@ -95,7 +97,7 @@ public class CategoriaController {
 
 	// update
 	@PutMapping("/{id}")
-	public ResponseEntity<Categoria> update(@RequestBody Categoria categoria, @PathVariable Integer id) {
+	public ResponseEntity<Categoria> update(@Valid @RequestBody Categoria categoria, @PathVariable Integer id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Categoria categoriaAtualizada = categoriaService.update(categoria, id);
