@@ -18,6 +18,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ClienteService implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	public ClienteRepository clienteRepository;
 	
@@ -118,12 +123,12 @@ public class ClienteService implements Serializable{
 		DadosCEPVO cepVO = consultarDadosPorCEP(cliente.getEndereco().getCep());
 		
 		for(Endereco clientelist : enderecoRepository.findAll()){
-			if(clientelist.getCep() == cliente.getEndereco().getCep()){
+			if(clientelist.getCep() != cliente.getEndereco().getCep()){
 				igual = true;
 			}
 		}
 		if(igual){
-			Endereco novoEndereco = enderecoRepository.save(cliente.getEndereco());
+			Endereco novoEndereco = new Endereco();
 			novoEndereco.setBairro(cepVO.getBairro());
 			novoEndereco.setCep(cepVO.getCep());
 			novoEndereco.setCidade(cepVO.getLocalidade());
@@ -131,7 +136,8 @@ public class ClienteService implements Serializable{
 			novoEndereco.setComplemento(cepVO.getComplemento());
 			novoEndereco.setNumero(cliente.getEndereco().getNumero());
 			novoEndereco.setRua(cepVO.getLogradouro());
-
+			
+			
 			return novoEndereco;
 		} else{
 			return cliente.getEndereco();
@@ -161,7 +167,7 @@ public class ClienteService implements Serializable{
 		clienteAtt.setSenha(cliente.getSenha());
 		clienteAtt.setTelefone(cliente.getTelefone());
 		clienteAtt.setUsername(cliente.getUsername());
-		clienteAtt.setEndereco(retornaCEP(cliente));
+		clienteAtt.setEndereco(cliente.getEndereco());
 	}
 	return clienteRepository.save(clienteAtt);
 }

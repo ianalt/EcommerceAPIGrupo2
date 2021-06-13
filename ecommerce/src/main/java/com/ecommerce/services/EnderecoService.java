@@ -49,5 +49,8 @@ public class EnderecoService {
 	public Endereco update(Endereco endereco, Integer id) {
 		endereco.setIdEndereco(id);
 		return enderecoRepository.save(endereco);
+		
+		
+		
 	}
 }

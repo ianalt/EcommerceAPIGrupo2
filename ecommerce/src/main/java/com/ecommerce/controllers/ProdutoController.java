@@ -32,7 +32,7 @@ public class ProdutoController {
 	public ResponseEntity<Produto> findByNome(@PathVariable String nome) {
 		HttpHeaders headers = new HttpHeaders();
 
-		Produto produto = produtoService.findByNome(nome.toLowerCase());
+		Produto produto = produtoService.findByNome(nome);
 
 		if (null != produto) {
 			return new ResponseEntity<>(produto, headers, HttpStatus.OK);
