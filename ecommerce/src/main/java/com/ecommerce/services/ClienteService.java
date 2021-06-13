@@ -22,7 +22,11 @@ public class ClienteService implements Serializable{
 	public ClienteRepository clienteRepository;
 	
 	@Autowired
+	public EnderecoService enderecoService;
+
+	@Autowired
 	public EnderecoRepository enderecoRepository;
+
 //	public ClienteVO convertEntidadeParaVO(Cliente cliente) {
 //		
 //		ClienteVO clienteVO = new ClienteVO();
@@ -114,7 +118,6 @@ public class ClienteService implements Serializable{
 		
 		boolean igual = false;
 
-		
 		DadosCEPVO cepVO = consultarDadosPorCEP(cliente.getEndereco().getCep());
 		
 		for(Endereco clientelist : enderecoRepository.findAll()){
@@ -122,8 +125,11 @@ public class ClienteService implements Serializable{
 				igual = true;
 			}
 		}
-		if(igual){
+		if(igual == true){
+			return cliente.getEndereco();
+		} else{
 			Endereco novoEndereco = enderecoRepository.save(cliente.getEndereco());
+
 			novoEndereco.setBairro(cepVO.getBairro());
 			novoEndereco.setCep(cepVO.getCep());
 			novoEndereco.setCidade(cepVO.getLocalidade());
@@ -133,11 +139,7 @@ public class ClienteService implements Serializable{
 			novoEndereco.setRua(cepVO.getLogradouro());
 
 			return novoEndereco;
-		} else{
-			return cliente.getEndereco();
 		}
-
-		
 	}
 
 	public boolean delete(Integer id) {
@@ -153,16 +155,14 @@ public class ClienteService implements Serializable{
 		
 		Cliente clienteAtt =  clienteRepository.findById(id).get();
 
-		if(consultarDadosPorCEP(cliente.getEndereco().getCep()).getCep() != null){
-
 		clienteAtt.setDataNascimento(cliente.getDataNascimento());
 		clienteAtt.setEmail(cliente.getEmail());
 		clienteAtt.setNome(cliente.getNome());
 		clienteAtt.setSenha(cliente.getSenha());
 		clienteAtt.setTelefone(cliente.getTelefone());
 		clienteAtt.setUsername(cliente.getUsername());
-		clienteAtt.setEndereco(retornaCEP(cliente));
-	}
+		clienteAtt.setEndereco(enderecoService.update(cliente.getEndereco(),id));
+
 	return clienteRepository.save(clienteAtt);
 }
 	

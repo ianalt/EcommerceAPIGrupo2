@@ -22,7 +22,7 @@ public class Endereco {
 	@Column(name = "id_endereco")
 	private Integer idEndereco;
 
-	@Size(max = 11, min = 11, message = "O CEP precisa ter 11 digitos")
+	@Size(max = 9, min = 9, message = "O CEP precisa ter 8 digitos")
 	@NotBlank(message = "O campo CEP não pode estar vazio")
 	@Column(name = "cep")
 	private String cep;
