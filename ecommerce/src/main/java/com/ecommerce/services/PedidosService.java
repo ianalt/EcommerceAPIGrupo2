@@ -20,8 +20,8 @@ public class PedidosService {
 	@Autowired
 	public PedidosRepository pedidosRepository;
 
-//	@Autowired
-//	public EmailService emailService;
+	@Autowired
+	public EmailService emailService;
 
 	public Pedidos findById(Integer id) {
 		Pedidos pedido = pedidosRepository.findById(id).get();
@@ -91,7 +91,7 @@ public class PedidosService {
 			pedidosAtt.setNumeroPedido(pedidos.getNumeroPedido());
 			// pedidosAtt.setCliente(pedidos.getCliente());	
 
-//			emailService.emailPedidos(pedidos);
+			emailService.emailPedidos(pedidos);
 		} else {
 			pedidosAtt.setStatus("fechado");
 
