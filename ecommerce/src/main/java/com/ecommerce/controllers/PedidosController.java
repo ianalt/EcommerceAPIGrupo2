@@ -2,6 +2,8 @@ package com.ecommerce.controllers;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.entities.Cliente;
 import com.ecommerce.entities.Pedidos;
+import com.ecommerce.exception.EmailException;
+import com.ecommerce.services.EmailService;
 import com.ecommerce.services.PedidosService;
 
 @RestController
@@ -25,6 +29,9 @@ import com.ecommerce.services.PedidosService;
 public class PedidosController {
 	@Autowired
 	private PedidosService pedidosService;
+
+	@Autowired
+	private EmailService emailService;
 
 	// findById
 	// @GetMapping("/{id}")
@@ -86,7 +93,7 @@ public class PedidosController {
 
 	// update
 	@PutMapping("/{id}")
-	public ResponseEntity<Pedidos> update(@RequestBody Pedidos pedido, @PathVariable Integer id) {
+	public ResponseEntity<Pedidos> update(@RequestBody Pedidos pedido, @PathVariable Integer id) throws MessagingException, EmailException {
 		HttpHeaders headers = new HttpHeaders();
 
 		Pedidos pedidoAtualizado = pedidosService.update(pedido, id);
