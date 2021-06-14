@@ -35,13 +35,13 @@ public class PedidosController {
 	// }
 
 	@GetMapping("/cliente/{cliente}")
-	public ResponseEntity <Pedidos> findByCliente(@PathVariable Cliente cliente){
+	public ResponseEntity <List<Pedidos>> findByCliente(@PathVariable Cliente cliente){
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity<>(pedidosService.findByCliente(cliente), headers, HttpStatus.OK);
 	}
 
 	// findAll
-	@GetMapping("/{id}")
+	@GetMapping
 	public ResponseEntity<List<Pedidos>> findAll(@RequestParam(required = false) Integer pagina,
 			@RequestParam(required = false) Integer qtdRegistros) throws Exception {
 		HttpHeaders headers = new HttpHeaders();

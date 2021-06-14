@@ -39,6 +39,7 @@ public class Endereco {
 	private String cidade;
 
 	// coloquei como string porque pode ser, por exemplo: 1875B
+	@NotBlank(message = "O número do endereço não pode estar vazio")
 	@Column(name = "numero")
 	private String numero;
 

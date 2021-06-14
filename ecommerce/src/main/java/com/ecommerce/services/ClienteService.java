@@ -4,16 +4,14 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.ecommerce.entities.Cliente;
 import com.ecommerce.repositories.ClienteRepository;
 import com.ecommerce.repositories.EnderecoRepository;
 import com.ecommerce.vo.DadosCEPVO;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 
 
@@ -79,9 +77,16 @@ public class ClienteService implements Serializable{
 		return cliente;
 	}
 
-	public Cliente findByUsernameAndSenha(String username, String senha) {
+	public String verificaLogin(String username, String senha) {
 		Cliente cliente = clienteRepository.findByUsernameAndSenha(username, senha);
-		return cliente;
+		
+		if(cliente != null) {
+			return "Usuário logado com sucesso!";
+		} else {
+			return "Nome de usuário e/ou senha incorretos!";
+		}
+		
+
 	}
 
 	public Cliente save(Cliente cliente) throws Exception {

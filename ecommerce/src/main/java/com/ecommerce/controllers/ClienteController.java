@@ -49,15 +49,15 @@ public class ClienteController {
 
 	// findByUsernameAndSenha
 	@GetMapping("/{username}/{senha}")
-	public ResponseEntity<Cliente> findByUsernameAndSenha(@PathVariable String username,@PathVariable String senha) {
+	public ResponseEntity<String> verificaLogin(@Valid @PathVariable String username,@PathVariable String senha) {
 		HttpHeaders headers = new HttpHeaders();
 
-		Cliente cliente = clienteService.findByUsernameAndSenha(username, senha);
+		String respostaLogin = clienteService.verificaLogin(username, senha);
 
-		if (null != cliente) {
-			return new ResponseEntity<>(cliente, headers, HttpStatus.OK);
+		if (null != respostaLogin) {
+			return new ResponseEntity<>(respostaLogin, headers, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(cliente, headers, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(respostaLogin, headers, HttpStatus.BAD_REQUEST);
 		}
 
 	}

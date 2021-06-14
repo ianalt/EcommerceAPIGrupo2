@@ -21,10 +21,9 @@ public class PedidosService {
 		return pedido;
 	}
 
-
-	public Pedidos findByCliente(Cliente cliente){
-		Pedidos pedido = pedidosRepository.findByCliente(cliente);
-		return pedido;
+	public List<Pedidos> findByCliente(Cliente cliente) {
+		List<Pedidos> listPedidos = pedidosRepository.findByCliente(cliente);
+		return listPedidos;
 
 	}
 
@@ -74,22 +73,20 @@ public class PedidosService {
 	}
 
 	public Pedidos update(Pedidos pedidos, Integer id) {
-		
 
-		Pedidos pedidosAtt =  pedidosRepository.findById(id).get();
+		Pedidos pedidosAtt = pedidosRepository.findById(id).get();
 
-
-		if (pedidosAtt.getStatus().equalsIgnoreCase("aberto")){
+		if (pedidosAtt.getStatus().equalsIgnoreCase("aberto")) {
 			pedidosAtt.setStatus(pedidos.getStatus());
-			
+
 			pedidosAtt.setTotalPedido(pedidos.getTotalPedido());
 			pedidosAtt.setDataPedido(pedidos.getDataPedido());
 			pedidosAtt.setNumeroPedido(pedidos.getNumeroPedido());
 			// pedidosAtt.setCliente(pedidos.getCliente());
-		}else{
+		} else {
 			pedidosAtt.setStatus("fechado");
 
-			//Adicionar o metodo de email
+			// Adicionar o metodo de email
 		}
 
 		return pedidosRepository.save(pedidosAtt);
