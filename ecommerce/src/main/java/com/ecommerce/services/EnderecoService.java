@@ -1,13 +1,18 @@
 package com.ecommerce.services;
 
 import java.util.List;
+import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validator;
 
 import com.ecommerce.entities.Endereco;
 import com.ecommerce.repositories.EnderecoRepository;
 import com.ecommerce.vo.DadosCEPVO;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class EnderecoService {
@@ -16,6 +21,9 @@ public class EnderecoService {
 
 	@Autowired
 	public ClienteService clienteService;
+
+	@Autowired
+	public Validator validator;
 
 	public Endereco findById(Integer id) {
 		Endereco endereco = enderecoRepository.findById(id).get();
@@ -41,7 +49,20 @@ public class EnderecoService {
 		}
 	}
 	
+	
 	public Endereco save(Endereco endereco) throws Exception {
+
+		Set<ConstraintViolation<Endereco>> violations = validator.validate(endereco);
+		
+		if(!violations.isEmpty()){
+			StringBuilder sb = new StringBuilder();
+			for(ConstraintViolation<Endereco> constraintViolation : violations) {
+				sb.append(constraintViolation.getMessage());
+			}
+			
+			throw new ConstraintViolationException("Alguns campos precisam ser reavaliados: "+sb.toString(),violations);
+		}
+
 		DadosCEPVO dadosCEP = clienteService.consultarDadosPorCEP(endereco.getCep());
 
 		endereco.setBairro(dadosCEP.getBairro());
@@ -61,6 +82,18 @@ public class EnderecoService {
 	}
 
 	public Endereco update(Endereco endereco, Integer id) throws Exception {
+
+		Set<ConstraintViolation<Endereco>> violations = validator.validate(endereco);
+		
+		if(!violations.isEmpty()){
+			StringBuilder sb = new StringBuilder();
+			for(ConstraintViolation<Endereco> constraintViolation : violations) {
+				sb.append(constraintViolation.getMessage() + " | ");
+			}
+			
+			throw new ConstraintViolationException("Alguns campos precisam ser reavaliados: "+sb.toString(),violations);
+		}
+
 		endereco.setIdEndereco(id);
 		DadosCEPVO dadosCEP = clienteService.consultarDadosPorCEP(endereco.getCep());
 
