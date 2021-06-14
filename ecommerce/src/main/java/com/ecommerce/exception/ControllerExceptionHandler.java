@@ -30,5 +30,4 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
 
         return super.handleExceptionInternal(ex, erroResposta, headers, status, request);
     }
-    
 }
